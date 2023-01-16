@@ -12,6 +12,6 @@ public class Recipe {
     private int weight;
     private  String measureUnit;
     private String cookingTime;
-    private List<String>  ingredients;
+    private List<Ingredients>  ingredients;
     private List <String> instruction;
 }
