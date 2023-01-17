@@ -20,8 +20,8 @@ public class RecipeController {
         return "Рецепт добавлен.";
     }
 
-    @GetMapping("/id")
-    public String getRecipe(@PathVariable("id") int id) {
+    @GetMapping("{/id}")
+    public String getRecipe(@PathVariable int id) {
         if (recipeService.getRecipe() != null) ;
         return recipeService.getRecipe();
 

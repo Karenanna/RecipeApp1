@@ -1,20 +1,32 @@
 package pro.sky.recipeapp1.services.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.springframework.stereotype.Service;
+import pro.sky.recipeapp1.model.Ingredients;
 
+import java.util.HashMap;
+import java.util.Map;
+@Service
 public class IngredientsServiceImpl implements IngredientsService{
 
-    private final Map<Integer, String> ingredientsMap = new HashMap<>();
+    private final Map<Integer, Ingredients> ingredientsMap = new HashMap<>();
 
-    public Map<Integer, String> getIngredientsMapMap() {
+    public Map<Integer, Ingredients> getIngredientsMapMap() {
         return ingredientsMap;
     }
 
-       @Override
-       public String getIngredientsService() {
-        return null;
+       public Ingredients getIngredients(Integer id) {
+        return ingredientsMap.get(id);
 
+    }
+
+
+    @Override
+    public String getIngredients() {
+        return null;
+    }
+
+    @Override
+    public String getIngredientsService() {
+        return null;
     }
 }
