@@ -22,7 +22,7 @@ public class RecipeController {
 
     @GetMapping("{/id}")
     public String getRecipe(@PathVariable int id) {
-        if (recipeService.getRecipe() != null) ;
+        if (recipeService.getRecipe(id) != null) ;
         return recipeService.getRecipe();
 
     }

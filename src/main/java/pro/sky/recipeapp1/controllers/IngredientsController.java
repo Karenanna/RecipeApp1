@@ -20,8 +20,8 @@ public class IngredientsController {
         return "Ингредиент добавлен";
 
     }
-    @GetMapping("/{id}")
-    public String getIngredients (@PathVariable int id) {
-        return ingredientsService.getIngredientsService();
+
+    public String getIngredients(@PathVariable int id) {
+        return ingredientsService.getIngredientsService(id);
     }
 }

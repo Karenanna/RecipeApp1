@@ -9,24 +9,27 @@ import java.util.Map;
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
+    private static Integer counter = 0;
+    private final Map<Integer, Recipe> recipeMap = new HashMap<Integer, Recipe>();
 
-    private final Map<Integer, String> recipeMap = new HashMap<>();
 
-    public Map<Integer, String> getRecipeMap() {
-        return recipeMap;
+    public Recipe getRecipe(int id) {
+        return recipeMap.get(id);
     }
 
+    @Override
+    public Recipe getRecipe(Integer id) {
+        return null;
+    }
 
-
-    public String getRecipe(Integer id) {
-        return recipeMap.get(id);
-
-
+    @Override
+    public Recipe addRecipe(Recipe recipe) {
+        return recipeMap.put(counter++, recipe);
     }
 
     @Override
     public String getRecipe() {
         return null;
     }
-
 }
+

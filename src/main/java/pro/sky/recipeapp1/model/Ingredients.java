@@ -8,5 +8,5 @@ import lombok.Data;
 public class Ingredients {
     private String name;
     private int count;
-    private  String measure;
+    private String measure;
 }
