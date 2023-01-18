@@ -10,15 +10,8 @@ public class IngredientsServiceImpl implements IngredientsService {
     private static Integer counter = 0;
     private final Map<Integer, Ingredients> ingredientsMap = new HashMap<>();
 
-
-    public Ingredients getIngredient(int id) {
+    public Ingredients getIngredient(Integer id) {
         return ingredientsMap.get(id);
-    }
-
-
-    public  Ingredients getIngredient (Integer id) {
-        return ingredientsMap.get(id);
-
     }
 
     public Ingredients addIngredient(Ingredients ingredient) {

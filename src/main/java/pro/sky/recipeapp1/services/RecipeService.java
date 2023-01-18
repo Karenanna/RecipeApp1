@@ -8,6 +8,5 @@ public interface RecipeService {
     Recipe getRecipe(Integer id);
 
     static Recipe addRecipe(Recipe recipe) {
-        return null;
     }
 }
