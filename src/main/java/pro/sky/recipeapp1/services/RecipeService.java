@@ -7,7 +7,7 @@ import java.util.List;
 public interface RecipeService {
     Recipe getRecipe(Integer id);
 
-    Recipe addRecipe(Recipe recipe);
-
-    String getRecipe();
+    static Recipe addRecipe(Recipe recipe) {
+        return null;
+    }
 }

@@ -15,13 +15,12 @@ public class IngredientsController {
     }
 
     @PostMapping("/add")
-    public String addIngredients(@RequestBody Ingredients ingredients){
-        IngredientsService IngredientsService = ingredientsService;
-        return "Ингредиент добавлен";
+    public Ingredients addIngredients(@RequestBody Ingredients ingredients){
+       return  IngredientsService.addIngredient(ingredients);
 
     }
-
-    public String getIngredients(@PathVariable int id) {
-        return ingredientsService.getIngredientsService(id);
+    @GetMapping("/{id}")
+    public Ingredients getIngredients(@PathVariable int id) {
+        return ingredientsService.getIngredient(id);
     }
 }

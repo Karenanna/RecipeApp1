@@ -10,26 +10,16 @@ import java.util.Map;
 public class RecipeServiceImpl implements RecipeService {
 
     private static Integer counter = 0;
-    private final Map<Integer, Recipe> recipeMap = new HashMap<Integer, Recipe>();
+    private final Map<Integer, Recipe> recipeMap = new HashMap<>();
 
 
-    public Recipe getRecipe(int id) {
+    public Recipe getRecipe(Integer id) {
         return recipeMap.get(id);
     }
 
-    @Override
-    public Recipe getRecipe(Integer id) {
-        return null;
-    }
-
-    @Override
     public Recipe addRecipe(Recipe recipe) {
         return recipeMap.put(counter++, recipe);
     }
 
-    @Override
-    public String getRecipe() {
-        return null;
-    }
 }
 

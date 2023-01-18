@@ -11,19 +11,18 @@ import java.util.List;
 public class RecipeController {
     private RecipeService  recipeService;
 
-    public RecipeController(RecipeService recipeService) {this.recipeService = recipeService;}
+    public RecipeController(RecipeService recipeService)
+    {this.recipeService = recipeService;}
 
 
     @PostMapping("/add")
-    public String addRecipe(@RequestBody Recipe recipe){
-        RecipeService RecipeService = recipeService;
-        return "Рецепт добавлен.";
+    public Recipe addRecipe(@RequestBody Recipe recipe){
+       return RecipeService.addRecipe(recipe);
+
     }
 
     @GetMapping("{/id}")
-    public String getRecipe(@PathVariable int id) {
-        if (recipeService.getRecipe(id) != null) ;
-        return recipeService.getRecipe();
-
+    public Recipe getRecipe(@PathVariable int id) {
+        return recipeService.getRecipe(id);
     }
 }

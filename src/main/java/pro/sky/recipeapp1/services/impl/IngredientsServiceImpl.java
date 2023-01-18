@@ -16,24 +16,13 @@ public class IngredientsServiceImpl implements IngredientsService {
     }
 
 
-    public Ingredients addIngredients(Ingredients ingredient) {
+    public  Ingredients getIngredient (Integer id) {
+        return ingredientsMap.get(id);
+
+    }
+
+    public Ingredients addIngredient(Ingredients ingredient) {
         return ingredientsMap.put(counter++, ingredient);
-
-    }
-
-    @Override
-    public Ingredients getIngredient(Integer id) {
-        return null;
-    }
-
-    @Override
-    public Ingredients getIngredient(Ingredients ingredient) {
-        return null;
-    }
-
-    @Override
-    public String getIngredientsService(int id) {
-        return null;
     }
 }
 
