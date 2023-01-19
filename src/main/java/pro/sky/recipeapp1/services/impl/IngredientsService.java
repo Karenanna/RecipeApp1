@@ -9,7 +9,7 @@ public interface IngredientsService {
 
     Ingredients getIngredient(Integer id);
 
-    static Ingredients addIngredient(Ingredients ingredient) {
+     Ingredients addIngredient(Ingredients ingredient) {
     }
 }
 
