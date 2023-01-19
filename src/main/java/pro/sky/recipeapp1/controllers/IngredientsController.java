@@ -16,7 +16,7 @@ public class IngredientsController {
 
     @PostMapping("/add")
     public Ingredients addIngredients(@RequestBody Ingredients ingredients){
-       return  IngredientsService.addIngredient(ingredients);
+       return  ingredientsService.addIngredient(ingredients);
 
     }
     @GetMapping("/{id}")

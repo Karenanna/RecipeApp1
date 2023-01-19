@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface RecipeService {
     Recipe getRecipe(Integer id);
-    Recipe addRecipe(Recipe recipe) {
-    }
+
+    Recipe addRecipe(Recipe recipe);
 }
