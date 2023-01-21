@@ -1,7 +1,9 @@
 package pro.sky.recipeapp1.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.recipeapp1.model.Ingredients;
+import pro.sky.recipeapp1.model.Recipe;
 import pro.sky.recipeapp1.services.impl.IngredientsService;
 
 @RestController
@@ -15,12 +17,35 @@ public class IngredientsController {
     }
 
     @PostMapping("/add")
-    public Ingredients addIngredients(@RequestBody Ingredients ingredients){
-       return  ingredientsService.addIngredient(ingredients);
+    public ResponseEntity<String> addIngredients(@RequestBody Ingredients ingredients){
+       String id = String.valueOf(ingredientsService.addIngredient(ingredients));
+        return ResponseEntity.ok(id);
 
     }
     @GetMapping("/{id}")
-    public Ingredients getIngredients(@PathVariable int id) {
-        return ingredientsService.getIngredient(id);
+    public ResponseEntity <Ingredients> getIngredients(@PathVariable int id) {
+        Ingredients ingredients = ingredientsService.getIngredient(id);
+        if (ingredients == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(ingredients);
+
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Ingredients> editIngredients(@PathVariable int id, @RequestBody  Ingredients ingredients) {
+        Ingredients ingredients1 = IngredientsService.getIngredients(id);
+        if (ingredients == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(ingredients);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteIngredients(@PathVariable int id, @RequestBody Ingredients ingredients) {
+        if (ingredientsService.deleteIngredients(id)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
+
