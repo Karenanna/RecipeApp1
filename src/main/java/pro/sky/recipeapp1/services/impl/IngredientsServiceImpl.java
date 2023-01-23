@@ -2,7 +2,6 @@ package pro.sky.recipeapp1.services.impl;
 
 import org.springframework.stereotype.Service;
 import pro.sky.recipeapp1.model.Ingredients;
-import pro.sky.recipeapp1.model.Recipe;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -34,8 +33,7 @@ public class IngredientsServiceImpl implements IngredientsService {
         return false;
     }
 
-    @Override
-    public Recipe removeRecipe(int id) {
+    public Ingredients removeRecipe(int id) {
         if (ingredientsMap.containsKey(id)) {
             return null;
         }

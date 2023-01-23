@@ -6,6 +6,8 @@ import pro.sky.recipeapp1.model.Ingredients;
 import pro.sky.recipeapp1.model.Recipe;
 import pro.sky.recipeapp1.services.RecipeService;
 
+import java.util.Collection;
+
 @RequestMapping("/recipe")
 @RestController
 public class RecipeController {
@@ -14,6 +16,7 @@ public class RecipeController {
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
+
 
 
     @PostMapping("/add")
@@ -48,4 +51,10 @@ public class RecipeController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/All")
+    public Collection<Recipe> getAllRecipe() {
+        return recipeService.getAll();
+    }
+
 }

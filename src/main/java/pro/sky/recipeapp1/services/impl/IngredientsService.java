@@ -8,6 +8,7 @@ public interface IngredientsService {
 
 
 
+
     Ingredients getIngredient(Integer id);
 
     Ingredients addIngredient(Ingredients ingredient);
