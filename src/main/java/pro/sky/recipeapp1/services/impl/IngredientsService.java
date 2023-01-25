@@ -13,6 +13,10 @@ public interface IngredientsService {
     Collection<Ingredients> getAll();
 
     boolean deleteIngredients(int id);
+
+    void saveToFile();
+
+    void readFromFileIngredients();
 }
 
 

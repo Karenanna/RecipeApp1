@@ -14,4 +14,8 @@ public interface RecipeService {
     boolean deleteRecipe(int id);
 
     Recipe removeRecipe(int id);
+
+    void saveToFile();
+
+    void readFromFile();
 }
