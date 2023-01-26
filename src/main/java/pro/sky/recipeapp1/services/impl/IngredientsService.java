@@ -14,6 +14,9 @@ public interface IngredientsService {
 
     boolean deleteIngredients(int id);
 
+    Ingredients removeIngredients(int id);
+
+
     void saveToFile();
 
     void readFromFileIngredients();

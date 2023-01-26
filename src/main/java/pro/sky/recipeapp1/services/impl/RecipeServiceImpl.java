@@ -9,14 +9,15 @@ import pro.sky.recipeapp1.model.Recipe;
 import pro.sky.recipeapp1.services.FilesService;
 import pro.sky.recipeapp1.services.RecipeService;
 
+import javax.annotation.PostConstruct;
 import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.TreeMap;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
+    @Value("${path.of.recipe.date.file}")
+    private String dataFilePath;
     @Value("${name.of.recipe.date.file}")
     private String dataFileName;
 
@@ -26,7 +27,13 @@ public class RecipeServiceImpl implements RecipeService {
         this.filesService = filesService;
     }
 
+    @PostConstruct
+    private void init() {
+        readFromFile();
+    }
+
     private static Integer counter = 0;
+
     private TreeMap<Integer, Recipe> recipeMap = new TreeMap<>();
 
     @Override
@@ -47,10 +54,6 @@ public class RecipeServiceImpl implements RecipeService {
 
     }
 
-    @Override
-    public boolean deleteRecipe(int id) {
-        return false;
-    }
 
     @Override
     public Recipe removeRecipe(int id) {
@@ -60,27 +63,34 @@ public class RecipeServiceImpl implements RecipeService {
         }
         return recipeMap.remove(id);
     }
-    @Override
-    public void saveToFile() {
+
+    private void saveToFile() {
         try {
             String json = new ObjectMapper().writeValueAsString(recipeMap);
-            filesService.saveToFile(json);
+            filesService.saveToFile(json, dataFileName);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
 
         }
 
     }
-    @Override
+
     public void readFromFile() {
-        String json = filesService.readFromFile();
+        String json = filesService.readFromFile(dataFileName);
         try {
-          recipeMap =  new ObjectMapper().readValue(json, new TypeReference<TreeMap<Integer, Recipe>>() {
+            recipeMap = new ObjectMapper().readValue(json, new TypeReference<TreeMap<Integer, Recipe>>() {
             });
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    @Override
+    public boolean deleteRecipe(int id) {
+        return false;
     }
 }
+
+
+
 

@@ -8,18 +8,26 @@ import org.springframework.stereotype.Service;
 import pro.sky.recipeapp1.model.Ingredients;
 import pro.sky.recipeapp1.services.FilesService;
 
+import javax.annotation.PostConstruct;
 import java.util.Collection;
-import java.util.Map;
 import java.util.TreeMap;
 
 @Service
 public class IngredientsServiceImpl implements IngredientsService {
+    @Value("${path.of.ingredients.date.file}")
+    private String dataFilePath;
     @Value("${name.of.ingredients.date.file}")
+    private String dataFileName;
 
     private FilesService filesService;
 
     public IngredientsServiceImpl(FilesService filesService) {
         this.filesService = filesService;
+    }
+   @PostConstruct
+    private void init() {
+        readFromFileIngredients();
+
     }
 
     private static Integer counter = 0;
@@ -46,10 +54,9 @@ public class IngredientsServiceImpl implements IngredientsService {
     public boolean deleteIngredients(int id) {
         return false;
     }
-
+     @Override
     public Ingredients removeIngredients(int id) {
         if (ingredientsMap.containsKey(id)) {
-            saveToFile();
             return null;
         }
         return ingredientsMap.remove(id);
@@ -59,7 +66,7 @@ public class IngredientsServiceImpl implements IngredientsService {
     public void saveToFile() {
         try {
             String json = new ObjectMapper().writeValueAsString(ingredientsMap);
-            filesService.saveToFile(json);
+            filesService.saveToFile(json, dataFileName);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
 

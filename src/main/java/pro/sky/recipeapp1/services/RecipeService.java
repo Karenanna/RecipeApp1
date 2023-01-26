@@ -11,11 +11,10 @@ public interface RecipeService {
 
     Collection<Recipe> getAll();
 
-    boolean deleteRecipe(int id);
-
     Recipe removeRecipe(int id);
 
-    void saveToFile();
 
     void readFromFile();
+
+    boolean deleteRecipe(int id);
 }
