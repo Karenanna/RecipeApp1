@@ -6,7 +6,4 @@ public interface FilesService {
 
     String readFromFile();
 
-    boolean cleanDataFile(String dataFileName);
-
-    String readFromFile(String dataFileName);
 }

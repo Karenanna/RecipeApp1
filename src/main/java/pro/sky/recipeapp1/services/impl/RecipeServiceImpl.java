@@ -9,6 +9,8 @@ import pro.sky.recipeapp1.model.Recipe;
 import pro.sky.recipeapp1.services.FilesService;
 import pro.sky.recipeapp1.services.RecipeService;
 
+
+
 import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.TreeMap;
@@ -18,7 +20,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Value("${path.of.recipe.date.file}")
     private String dataFilePath;
-    @Value("${name.of.recipe.date.file}")
+    @Value("${path.of.recipe.date.file}")
     private String dataFileName;
 
     private FilesService filesService;
@@ -29,8 +31,9 @@ public class RecipeServiceImpl implements RecipeService {
 
     @PostConstruct
     private void init() {
-        readFromFile();
+        readFromFileRecipe();
     }
+
 
     private static Integer counter = 0;
 
@@ -54,14 +57,25 @@ public class RecipeServiceImpl implements RecipeService {
 
     }
 
+    @Override
+    public boolean removeRecipe(int id) {
+        return false;
+    }
+
 
     @Override
-    public Recipe removeRecipe(int id) {
+    public boolean deleteRecipe(int id) {
         if (recipeMap.containsKey(id)) {
+            recipeMap.remove(id);
             saveToFile();
-            return null;
+            return true;
         }
-        return recipeMap.remove(id);
+        return false;
+    }
+
+    @Override
+    public void readFromFile() {
+
     }
 
     private void saveToFile() {
@@ -75,19 +89,14 @@ public class RecipeServiceImpl implements RecipeService {
 
     }
 
-    public void readFromFile() {
-        String json = filesService.readFromFile(dataFileName);
+    public void readFromFileRecipe() {
+        String json = filesService.readFromFile();
         try {
             recipeMap = new ObjectMapper().readValue(json, new TypeReference<TreeMap<Integer, Recipe>>() {
             });
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public boolean deleteRecipe(int id) {
-        return false;
     }
 }
 

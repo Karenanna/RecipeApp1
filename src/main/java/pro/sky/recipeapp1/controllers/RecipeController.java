@@ -89,8 +89,8 @@ public class RecipeController {
             )
     })
     @Parameters(value = {@Parameter(name = "id", example = "1")})
-    public ResponseEntity<Void> deleteRecipe(@PathVariable int id, @RequestBody Ingredients ingredients) {
-        if (recipeService.deleteRecipe(id)) {
+    public ResponseEntity<Void> removeRecipe(@PathVariable int id, @RequestBody Ingredients ingredients) {
+        if (recipeService.removeRecipe(id)) {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

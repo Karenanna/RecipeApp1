@@ -32,17 +32,18 @@ public class IngredientsController {
     @PostMapping("/add")
     @Operation(summary = "Добавлен ингредиент")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Ингредиент добавлен")})
-    public ResponseEntity<String> addIngredients(@RequestBody Ingredients ingredients){
-       String id = String.valueOf(ingredientsService.addIngredient(ingredients));
+    public ResponseEntity<String> addIngredients(@RequestBody Ingredients ingredients) {
+        String id = String.valueOf(ingredientsService.addIngredient(ingredients));
         return ResponseEntity.ok(id);
 
     }
+
     @Operation(summary = "Поиск ингредиентов по id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ингредиент был найден")})
     @Parameters(value = {@Parameter(name = "id", example = "1")})
     @GetMapping("/{id}")
-    public ResponseEntity <Ingredients> getIngredients(@PathVariable int id) {
+    public ResponseEntity<Ingredients> getIngredients(@PathVariable int id) {
         Ingredients ingredients = ingredientsService.getIngredient(id);
         if (ingredients == null) {
             return ResponseEntity.notFound().build();
@@ -50,6 +51,7 @@ public class IngredientsController {
         return ResponseEntity.ok(ingredients);
 
     }
+
     @PutMapping("/{id}")
     @Operation(summary = "Изменение ингредиентов по id")
     @ApiResponses(value = {
@@ -68,7 +70,7 @@ public class IngredientsController {
             @Parameter(name = "id",
                     example = "1")
     })
-    public ResponseEntity<Ingredients> editIngredients(@PathVariable int id, @RequestBody  Ingredients ingredients) {
+    public ResponseEntity<Ingredients> editIngredients(@PathVariable int id, @RequestBody Ingredients ingredients) {
         Ingredients ingredients1 = ingredientsService.getIngredient(id);
         if (ingredients == null) {
             return ResponseEntity.notFound().build();
@@ -85,12 +87,15 @@ public class IngredientsController {
             )
     })
     @Parameters(value = {@Parameter(name = "id", example = "1")})
-    public ResponseEntity<Void> deleteIngredients(@PathVariable int id, @RequestBody Ingredients ingredients) {
-        if (ingredientsService.deleteIngredients(id)) {
+    public ResponseEntity<Void> removeIngredients(@PathVariable int id, @RequestBody Ingredients ingredients) {
+        if (ingredientsService.removeIngredients(id)) {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
-    }
+
+
+
+}
 
     @GetMapping("/all")
     @Operation(summary = "Получение всех ингредиентов", description = "Поиск производится без параметров")

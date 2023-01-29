@@ -22,6 +22,7 @@ public class IngredientsServiceImpl implements IngredientsService {
     private FilesService filesService;
 
     public IngredientsServiceImpl(FilesService filesService) {
+
         this.filesService = filesService;
     }
    @PostConstruct
@@ -40,26 +41,30 @@ public class IngredientsServiceImpl implements IngredientsService {
 
     @Override
     public Ingredients addIngredient(Ingredients ingredient) {
+
         return ingredientsMap.put(counter++, ingredient);
     }
 
     @Override
     public Collection<Ingredients> getAll() {
+
         return ingredientsMap.values();
     }
 
+    @Override
+    public boolean removeIngredients(int id) {
+        return false;
+    }
 
 
     @Override
     public boolean deleteIngredients(int id) {
-        return false;
-    }
-     @Override
-    public Ingredients removeIngredients(int id) {
         if (ingredientsMap.containsKey(id)) {
-            return null;
+            ingredientsMap.remove(id);
+            saveToFile();
+            return true;
         }
-        return ingredientsMap.remove(id);
+        return false;
     }
 
     @Override

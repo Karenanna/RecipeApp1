@@ -22,7 +22,7 @@ public class FilesServiceImpl implements FilesService {
         try {
             cleanDataFile(dataFileName);
             Files.writeString(path, json);
-           return true;
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -34,14 +34,15 @@ public class FilesServiceImpl implements FilesService {
     @Override
     public String readFromFile() {
         try {
-           return Files.readString(Path.of(dataFilePath,dataFileName) );
+            return Files.readString(Path.of(dataFilePath, dataFileName));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
-    @Override
-    public boolean cleanDataFile(String dataFileName) {
+
+
+    private boolean cleanDataFile(String dataFileName) {
         try {
             Path path = Path.of(dataFilePath, dataFileName);
             Files.deleteIfExists(path);
@@ -51,10 +52,5 @@ public class FilesServiceImpl implements FilesService {
             e.printStackTrace();
             return false;
         }
-    }
-
-    @Override
-    public String readFromFile(String dataFileName) {
-        return null;
     }
 }

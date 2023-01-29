@@ -12,10 +12,11 @@ public interface IngredientsService {
 
     Collection<Ingredients> getAll();
 
+
+    boolean removeIngredients(int id);
+
+
     boolean deleteIngredients(int id);
-
-    Ingredients removeIngredients(int id);
-
 
     void saveToFile();
 
