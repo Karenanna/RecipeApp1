@@ -11,8 +11,6 @@ public interface RecipeService {
 
     Collection<Recipe> getAll();
 
-    boolean removeRecipe(int id);
-
 
     boolean deleteRecipe(int id);
 

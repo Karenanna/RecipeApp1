@@ -51,11 +51,6 @@ public class IngredientsServiceImpl implements IngredientsService {
         return ingredientsMap.values();
     }
 
-    @Override
-    public boolean removeIngredients(int id) {
-        return false;
-    }
-
 
     @Override
     public boolean deleteIngredients(int id) {

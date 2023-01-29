@@ -13,14 +13,13 @@ public interface IngredientsService {
     Collection<Ingredients> getAll();
 
 
-    boolean removeIngredients(int id);
 
-
-    boolean deleteIngredients(int id);
 
     void saveToFile();
 
     void readFromFileIngredients();
+
+    boolean deleteIngredients(int id);
 }
 
 

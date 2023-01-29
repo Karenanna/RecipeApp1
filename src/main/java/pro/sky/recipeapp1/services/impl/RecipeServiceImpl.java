@@ -57,11 +57,6 @@ public class RecipeServiceImpl implements RecipeService {
 
     }
 
-    @Override
-    public boolean removeRecipe(int id) {
-        return false;
-    }
-
 
     @Override
     public boolean deleteRecipe(int id) {

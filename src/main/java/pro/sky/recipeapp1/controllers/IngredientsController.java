@@ -87,8 +87,8 @@ public class IngredientsController {
             )
     })
     @Parameters(value = {@Parameter(name = "id", example = "1")})
-    public ResponseEntity<Void> removeIngredients(@PathVariable int id, @RequestBody Ingredients ingredients) {
-        if (ingredientsService.removeIngredients(id)) {
+    public ResponseEntity<Void> deleteIngredients(@PathVariable int id, @RequestBody Ingredients ingredients) {
+        if (ingredientsService.deleteIngredients(id)) {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
