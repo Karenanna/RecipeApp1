@@ -19,8 +19,6 @@ import java.util.TreeMap;
 public class RecipeServiceImpl implements RecipeService {
 
     @Value("${path.of.recipe.date.file}")
-    private String dataFilePath;
-    @Value("${path.of.recipe.date.file}")
     private String dataFileName;
 
     private FilesService filesService;

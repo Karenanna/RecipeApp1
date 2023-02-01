@@ -10,11 +10,11 @@ import java.nio.file.Path;
 
 @Service
 public class FilesServiceImpl implements FilesService {
-    @Value("${src,main,resources}")
+    @Value("${path.to.data.file}")
     private String dataFilePath;
-
-    @Value("${src,main,resources}")
+    @Value("${name.of.recipe.data.file}")
     private String dataFileName;
+
 
     @Override
     public boolean saveToFile(String json, String dataFileName) {

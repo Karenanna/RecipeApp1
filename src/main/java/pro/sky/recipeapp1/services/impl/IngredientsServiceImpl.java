@@ -14,8 +14,6 @@ import java.util.TreeMap;
 
 @Service
 public class IngredientsServiceImpl implements IngredientsService {
-    @Value("${path.of.ingredients.date.file}")
-    private String dataFilePath;
     @Value("${name.of.ingredients.date.file}")
     private String dataFileName;
 
