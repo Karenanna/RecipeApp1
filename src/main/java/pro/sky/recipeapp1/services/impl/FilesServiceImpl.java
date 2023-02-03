@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pro.sky.recipeapp1.services.FilesService;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -52,5 +53,13 @@ public class FilesServiceImpl implements FilesService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @PostConstruct
+    private void init() {
+        readFromFileIngredients();
+    }
+
+    private void readFromFileIngredients() {
     }
 }

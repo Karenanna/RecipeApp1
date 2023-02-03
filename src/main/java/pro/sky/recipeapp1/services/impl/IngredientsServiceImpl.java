@@ -54,7 +54,6 @@ public class IngredientsServiceImpl implements IngredientsService {
     public boolean deleteIngredients(int id) {
         if (ingredientsMap.containsKey(id)) {
             ingredientsMap.remove(id);
-            saveToFile();
             return true;
         }
         return false;
