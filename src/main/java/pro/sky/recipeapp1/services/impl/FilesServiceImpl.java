@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pro.sky.recipeapp1.services.FilesService;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,6 +41,10 @@ public class FilesServiceImpl implements FilesService {
             throw new RuntimeException(e);
         }
 
+    }
+    @Override
+    public File getDataFile() {
+        return new File(dataFilePath+ "/" + dataFileName);
     }
 
 
