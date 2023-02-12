@@ -2,6 +2,7 @@ package pro.sky.recipeapp1.services;
 
 import pro.sky.recipeapp1.model.Recipe;
 
+import java.io.File;
 import java.util.Collection;
 
 public interface RecipeService {
@@ -18,4 +19,8 @@ public interface RecipeService {
 
 
     void readFromFileRecipe();
+
+    void cleanDataFile();
+
+    File getDataFile();
 }
