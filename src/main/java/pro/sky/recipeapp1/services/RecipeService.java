@@ -1,5 +1,6 @@
 package pro.sky.recipeapp1.services;
 
+import org.springframework.web.multipart.MultipartFile;
 import pro.sky.recipeapp1.model.Recipe;
 
 import java.io.File;
@@ -20,7 +21,6 @@ public interface RecipeService {
 
     void readFromFileRecipe();
 
-    void cleanDataFile();
 
-    File getDataFile();
+    void importFile(MultipartFile file);
 }

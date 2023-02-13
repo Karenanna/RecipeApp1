@@ -56,33 +56,17 @@ public class FilesController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
-    private ResponseEntity<Void> uploadDataFile(String value, MultipartFile multipartFile) {
-        File dataFile = null;
-        if (value.equals("importrecipe")) {
-            recipeService.cleanDataFile();
-            dataFile = recipeService.getDataFile();
-        } else if (value.equals("importingredients")) {
-            ingredientsService.getDataFile
-        }
-        try {
-            assert dataFile != null;
-            try (FileOutputStream fos = new FileOutputStream(dataFile)) {
-                IOUtils.copy(multipartFile.getInputStream(), fos);
-                return ResponseEntity.ok().build();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    }
+
 
     @PostMapping(value = "/importrecipe", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> uploadRecipeDataFile(@RequestParam MultipartFile file) {
-        return uploadDataFile("/importrecipe", file);
+    public ResponseEntity<Void> uploadRecipeDataFile(@RequestParam MultipartFile file) throws FileNotFoundException{
+        recipeService.importFile(file);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping(value = "importingredients", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> uploadIngredientsDataFile(@RequestParam MultipartFile file) {
-        return uploadDataFile("importingredients", file);
+    public ResponseEntity<Void> uploadIngredientsDataFile(@RequestParam MultipartFile file) throws FileNotFoundException{
+        ingredientsService.importFile(file);
+        return ResponseEntity.ok().build();
     }
 }
