@@ -64,7 +64,7 @@ public class FilesController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = "importingredients", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/importingredients", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> uploadIngredientsDataFile(@RequestParam MultipartFile file) throws FileNotFoundException{
         ingredientsService.importFile(file);
         return ResponseEntity.ok().build();
