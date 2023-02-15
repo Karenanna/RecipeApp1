@@ -12,7 +12,13 @@ import pro.sky.recipeapp1.services.RecipeService;
 
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
 @Service
@@ -66,6 +72,7 @@ public class RecipeServiceImpl implements RecipeService {
         return false;
     }
 
+
     @Override
     public void readFromFile() {
 
@@ -90,6 +97,19 @@ public class RecipeServiceImpl implements RecipeService {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Path createRecipeReport(Recipe recipe) throws IOException {
+        LinkedHashMap<Integer, Recipe> recipeReport = recipe.getOrDefault(recipe, new LinkedHashMap<>());
+        Path path = filesService.createTempFile("report");
+        for (Recipe recipe1 : recipeReport.values()) {
+            try (Writer writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
+                writer.append(recipe.getName() + ": " + recipe.getMeasureUnit() + "грам");
+                writer.append("\n");
+            }
+        }
+        return path;
     }
 }
 

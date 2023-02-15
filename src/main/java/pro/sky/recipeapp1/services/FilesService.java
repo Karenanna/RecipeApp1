@@ -1,6 +1,7 @@
 package pro.sky.recipeapp1.services;
 
 import java.io.File;
+import java.nio.file.Path;
 
 public interface FilesService {
 
@@ -10,5 +11,5 @@ public interface FilesService {
 
     File getDataFile();
 
-    void cleanDataFile();
+    Path createTempFile(String suffix);
 }

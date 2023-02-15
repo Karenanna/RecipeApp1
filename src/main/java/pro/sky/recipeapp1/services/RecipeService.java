@@ -4,6 +4,8 @@ import org.springframework.web.multipart.MultipartFile;
 import pro.sky.recipeapp1.model.Recipe;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Collection;
 
 public interface RecipeService {
@@ -23,4 +25,6 @@ public interface RecipeService {
 
 
     void importFile(MultipartFile file);
+
+    Path createRecipeReport(Recipe recipe) throws IOException;
 }
