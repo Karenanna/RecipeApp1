@@ -16,8 +16,6 @@ public interface IngredientsService {
     Collection<Ingredients> getAll();
 
 
-    Path createIngredientsReport(Ingredients ingredients) throws IOException;
-
     void saveToFile();
 
     void readFromFileIngredients();

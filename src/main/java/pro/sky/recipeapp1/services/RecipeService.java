@@ -25,6 +25,4 @@ public interface RecipeService {
 
 
     void importFile(MultipartFile file);
-
-    Path createRecipeReport(Recipe recipe) throws IOException;
 }

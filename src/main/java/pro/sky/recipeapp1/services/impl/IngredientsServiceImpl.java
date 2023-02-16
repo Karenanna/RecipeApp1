@@ -5,17 +5,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import pro.sky.recipeapp1.model.Ingredients;
 import pro.sky.recipeapp1.services.FilesService;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
 @Service
@@ -64,18 +59,7 @@ public class IngredientsServiceImpl implements IngredientsService {
         }
         return false;
     }
-    @Override
-    public Path createIngredientsReport(Ingredients ingredients) throws IOException {
-        LinkedHashMap <Integer, Ingredients> ingredientsReport = ingredients.getOrDefault(ingredients, new LinkedHashMap<>());
-        Path path = filesService.createTempFile("report");
-        for (Ingredients ingredient : ingredientsReport.values()) {
-            try (Writer writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
-               writer.append(ingredient.getName() + ": " + ingredient.getCount() + "грам" );
-               writer.append("\n");
-            }
-        }
-        return path;
-    }
+
 
     @Override
     public void saveToFile() {
@@ -92,11 +76,14 @@ public class IngredientsServiceImpl implements IngredientsService {
     public void readFromFileIngredients() {
         String json = filesService.readFromFile();
         try {
-            ingredientsMap =  new ObjectMapper().readValue(json, new TypeReference<TreeMap<Integer, Ingredients>>() {
+            ingredientsMap = new ObjectMapper().readValue(json, new TypeReference<TreeMap<Integer, Ingredients>>() {
             });
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+    @Override
+    public void importFile(MultipartFile file) {
 
     }
 }

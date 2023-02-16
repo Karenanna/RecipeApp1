@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import pro.sky.recipeapp1.model.Recipe;
 import pro.sky.recipeapp1.services.FilesService;
 import pro.sky.recipeapp1.services.RecipeService;
@@ -98,18 +99,9 @@ public class RecipeServiceImpl implements RecipeService {
             throw new RuntimeException(e);
         }
     }
-
     @Override
-    public Path createRecipeReport(Recipe recipe) throws IOException {
-        LinkedHashMap<Integer, Recipe> recipeReport = recipe.getOrDefault(recipe, new LinkedHashMap<>());
-        Path path = filesService.createTempFile("report");
-        for (Recipe recipe1 : recipeReport.values()) {
-            try (Writer writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
-                writer.append(recipe.getName() + ": " + recipe.getMeasureUnit() + "грам");
-                writer.append("\n");
-            }
-        }
-        return path;
+    public void importFile(MultipartFile file) {
+
     }
 }
 

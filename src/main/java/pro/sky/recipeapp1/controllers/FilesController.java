@@ -43,18 +43,8 @@ public class FilesController {
         }
     }
 
-    @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> uploadDataFile(@RequestParam MultipartFile file) {
-        filesService.cleanDataFile();
-        File dataFile = filesService.getDataFile();
-        try (FileOutputStream fos = new FileOutputStream(dataFile)) {
-            IOUtils.copy(file.getInputStream(), fos);
-            return ResponseEntity.ok().build();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    }
+
+
 
 
 
