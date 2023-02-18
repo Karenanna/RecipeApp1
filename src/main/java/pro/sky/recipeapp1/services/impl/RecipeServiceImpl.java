@@ -38,6 +38,7 @@ public class RecipeServiceImpl implements RecipeService {
     private String dataFileName;
 
     private FilesService filesService;
+    private File dataFilePath;
 
     public RecipeServiceImpl(FilesService filesService) {
         this.filesService = filesService;
@@ -110,19 +111,12 @@ public class RecipeServiceImpl implements RecipeService {
     }
     @Override
     public void importFile(MultipartFile file) {
-        @PostMapping(value = "/import/{dataNameFile}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-                public ResponseEntity<Void> upLoadeFiles(@PathVariable String dataFileName, @RequestParam MultipartFile file){
-            filesService.cleanFile(dataFileName);
-            File dataFile = filesService.getDataFile(dataFileName);
-            try (FileOutputStream fos = new FileOutputStream(dataFile)){
-                IOUtils.copy(file.getInputStream(), fos);
-                return ResponseEntity.ok().build();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        File dataFile = new File(dataFilePath + "/" + dataFileName);
+        try (FileOutputStream fos = new FileOutputStream(dataFile)) {
+            IOUtils.copy(file.getInputStream(), fos);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 }
 

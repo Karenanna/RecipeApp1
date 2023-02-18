@@ -29,12 +29,14 @@ public class IngredientsServiceImpl implements IngredientsService {
     private String dataFileName;
 
     private FilesService filesService;
+    private File dataFilePath;
 
     public IngredientsServiceImpl(FilesService filesService) {
 
         this.filesService = filesService;
     }
-   @PostConstruct
+
+    @PostConstruct
     private void init() {
         readFromFileIngredients();
 
@@ -82,6 +84,7 @@ public class IngredientsServiceImpl implements IngredientsService {
         }
 
     }
+
     @Override
     public void readFromFileIngredients() {
         String json = filesService.readFromFile();
@@ -92,23 +95,18 @@ public class IngredientsServiceImpl implements IngredientsService {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public void importFile(MultipartFile file) {
-        @PostMapping(value = "/import/{dataNameFile}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-        public ResponseEntity<Void> upLoadeFiles(@PathVariable String dataFileName, @RequestParam MultipartFile file){
-            filesService.cleanFile(dataFileName);
-            File dataFile = filesService.getDataFile(dataFileName);
-            try (FileOutputStream fos = new FileOutputStream(dataFile)){
-                IOUtils.copy(file.getInputStream(), fos);
-                return ResponseEntity.ok().build();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        File dataFile = new File(dataFilePath + "/" + dataFileName);
+        try (FileOutputStream fos = new FileOutputStream(dataFile)) {
+            IOUtils.copy(file.getInputStream(), fos);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 }
+
 
 
 
