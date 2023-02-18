@@ -33,12 +33,13 @@ import java.util.TreeMap;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
-
+     @Value("${path.to.data.file}")
+     private String dataFilePath;
     @Value("${path.of.recipe.date.file}")
     private String dataFileName;
 
     private FilesService filesService;
-    private File dataFilePath;
+
 
     public RecipeServiceImpl(FilesService filesService) {
         this.filesService = filesService;

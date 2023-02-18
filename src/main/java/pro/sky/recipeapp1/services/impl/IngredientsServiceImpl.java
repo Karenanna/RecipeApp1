@@ -25,10 +25,12 @@ import java.util.TreeMap;
 
 @Service
 public class IngredientsServiceImpl implements IngredientsService {
+    private FilesService filesService;
     @Value("${name.of.ingredients.date.file}")
     private String dataFileName;
 
-    private FilesService filesService;
+    @Value("${path.to.data.file}")
+    private String  dataFilePhat;
     private File dataFilePath;
 
     public IngredientsServiceImpl(FilesService filesService) {
