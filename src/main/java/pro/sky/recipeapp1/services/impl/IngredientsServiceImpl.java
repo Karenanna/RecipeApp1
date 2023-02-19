@@ -30,7 +30,7 @@ public class IngredientsServiceImpl implements IngredientsService {
     private String dataFileName;
 
     @Value("${path.to.data.file}")
-    private String  dataFilePhat;
+    private String  dataFilePath;
 
 
     public IngredientsServiceImpl(FilesService filesService) {
