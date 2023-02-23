@@ -12,8 +12,8 @@ import java.util.List;
 public class Recipe {
     private String name;
     private int weight;
-    private  String measureUnit;
+    private String measureUnit;
     private String cookingTime;
-    private List<Ingredients>  ingredients;
-    private List <String> instruction;
+    private List<Ingredients> ingredients;
+    private List<String> instruction;
 }

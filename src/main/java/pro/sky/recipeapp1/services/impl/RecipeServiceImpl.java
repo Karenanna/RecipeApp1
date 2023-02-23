@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import pro.sky.recipeapp1.model.Ingredients;
 import pro.sky.recipeapp1.model.Recipe;
 import pro.sky.recipeapp1.services.FilesService;
 import pro.sky.recipeapp1.services.RecipeService;
@@ -24,6 +25,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -118,6 +120,28 @@ public class RecipeServiceImpl implements RecipeService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public Path createRecipeInTxt() throws IOException{
+        Path recipeText = filesService.createTempFile("Recipe_text");
+        try (Writer writer = Files.newBufferedWriter(recipeText, StandardCharsets.UTF_8)) {
+            for (Recipe recipe : Recipe.values()) {
+                StringBuilder ingredients = new StringBuilder();
+                StringBuilder instructions = new StringBuilder();
+                for (Ingredients ingredient : recipe.getIngredients()) {
+                    ingredients.append(ingredients).append(",\n");
+                }
+                for (String ints : recipe.getInstruction()) {
+                    instructions.append("\n").append(instructions);
+                }
+                writer.append(recipe.getName()).append("\n").append("Время приготовления:  ")
+                        .append(String.valueOf(recipe.getCookingTime())).append("минут").append("\n")
+                        .append("необходимые ингредиенты: \n")
+                        .append(ingredients.toString()).append("Инструкция")
+                        .append(instructions.toString());
+                writer.append("\n\n");
+            }
+        }
+        return recipeText;
     }
 }
 

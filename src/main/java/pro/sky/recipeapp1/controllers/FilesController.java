@@ -45,7 +45,21 @@ public class FilesController {
 
 
 
+    @GetMapping(value = "/exportRecipe", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<InputStreamResource> downloadCreateRecipeInTxt() throws FileNotFoundException {
+        File file = filesService.getDataFile();
 
+        if (file.exists()) {
+            InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .contentLength(file.length())
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"RecipeLog.json\"")
+                    .body(resource);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
 
 
     @PostMapping(value = "/importrecipe", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
